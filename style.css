@@ -35,7 +35,6 @@ form {
   }
 
 .grid-container {
-    border: solid blueviolet;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 364px);
@@ -44,6 +43,8 @@ form {
 .recette_container {
     background-color: #E7E7E7;
     border-radius: 5px;
+    overflow: auto;
+    height: 364px;
 }
 
 .photo-recette{
