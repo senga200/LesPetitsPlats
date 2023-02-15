@@ -9,7 +9,7 @@
                     "ingredient" : "Lait de coco",
                     "quantity" : 400,
                     "unit" : "ml"
-                },
+               },
                 {
                     "ingredient" : "Jus de citron",
                     "quantity" : 2
@@ -142,7 +142,7 @@
             "time": 50,
             "description": "Faire cuire le riz. Une fois le riz cuit, le laisser refroidir. Couper les oeufs dur en quarts ou en lamelle au choix, coupez le tomates en dés, ajouter au riz les oeufs, les tomates, le poisson, le maïs et la vinaigrette. Ajouter au gout de chacun des cornichons, olives etc..",
             "appliance": "Cuiseur de riz",
-            "ustensils": ["saladier", "passoire"]
+            "ustensils": ["saladier", "passeoire"]
         },
         {
             "id": 5,
@@ -313,7 +313,7 @@
                     "unit": "grammes"
                 },
                 {
-                    "ingredient": "Vinaigre Balsamic"
+                    "ingredient": "Vinaigre Balsamique"
                 },
                 {
                     "ingredient": "Huile d'olive"
@@ -570,7 +570,7 @@
                     "unit":"tiges"
                 },
                 {
-                    "ingredient": "huile d'olives",
+                    "ingredient": "huile d'olive",
                     "quantity": 2,
                     "unit": "cuillère à soupe"
                 }
@@ -909,7 +909,7 @@
                     "quantity": 1
                 },
                 {
-                    "ingredient": "Huile d'olives"
+                    "ingredient": "Huile d'olive"
                 },
                 {
                     "ingredient": "Oignon",
@@ -922,8 +922,8 @@
                 }
             ],
             "time": 25,
-            "description":"Verser de l'huile dans une cocotte minute couper les légumes et les verser dans l'huile chaude. Laisser cuire et remuer pendant 10 minutes. Passer aux mixer. Servir.",
-            "appliance": "Mixer",
+            "description":"Verser de l'huile dans une cocotte minute couper les légumes et les verser dans l'huile chaude. Laisser cuire et remuer pendant 10 minutes. Passer au mixeur. Servir.",
+            "appliance": "Mixeur",
             "ustensils":["cocotte minute", "couteau"]
         },
         {
@@ -992,7 +992,7 @@
             ],
             "time": 80,
             "description":"Émincer les blanc de poireaux et les faire chauffer dans 25 grammes de beurre. Ajouter les pommes de terres coupées en morceaux. Ajouter l'eau et laisser mijoter pour 45 minutes. Chauffer l'oseille avec le beurre restant puis incorporer le tout. Mixez. Ajoutez la crème. Bon appetit.",
-            "appliance": "Mixer",
+            "appliance": "Mixeur",
             "ustensils":["casserole","couteau"]
         },
         {
@@ -1022,8 +1022,8 @@
                 }
             ],
             "time": 30,
-            "description":"Prendre les pois chiches, les mettre dans le mixer avec de l'huile d'olive, ajouter le jus des 2 citrons et du paprika selon le gout.",
-            "appliance": "Mixer",
+            "description":"Prendre les pois chiches, les mettre dans le mixeur avec de l'huile d'olive, ajouter le jus des 2 citrons et du paprika selon le gout.",
+            "appliance": "Mixeur",
             "ustensils":["cuillère en bois", "presse citron"]
         },
         {
@@ -1032,7 +1032,7 @@
             "servings": 4,
             "ingredients": [
                 {
-                    "ingredient": "Pois Cassé",
+                    "ingredient": "Pois Cassés",
                     "quantity": 500,
                     "unit": "grammes"
                 },
@@ -1047,8 +1047,8 @@
                 }
             ],
             "time": 60,
-            "description":"Mettre tous les ingrédients dans une cocotte. ajouter de l'eau pour recouvrir l'ensemble et laisser cuire à petit feu pour 1 heure. Passer au mixer. Salez, poivrez. C'est prêt",
-            "appliance": "Mixer",
+            "description":"Mettre tous les ingrédients dans une cocotte. ajouter de l'eau pour recouvrir l'ensemble et laisser cuire à petit feu pour 1 heure. Passer au mixeur. Salez, poivrez. C'est prêt",
+            "appliance": "Mixeur",
             "ustensils":["casserole", "cuillère en bois"]
         },
         {
@@ -1185,8 +1185,8 @@
                 }
             ],
             "time": 25,
-            "description":"Éplucher les patates douces et coupez les en morceaux. Les faire cuire durant 20 minute dans une casserole d'eau bouillante. Passer au mixer en ajoutant la crème et l'huile d'olive à son gout. Salez, poivrez. Pressez l'orange et ajouter le jus à l'ensemble. Servir.",
-            "appliance": "Mixer",
+            "description":"Éplucher les patates douces et coupez les en morceaux. Les faire cuire durant 20 minute dans une casserole d'eau bouillante. Passer au mixeur en ajoutant la crème et l'huile d'olive à son gout. Salez, poivrez. Pressez l'orange et ajouter le jus à l'ensemble. Servir.",
+            "appliance": "Mixeur",
             "ustensils":["couteau", "économe", "cuillère en bois"]
         },
         {
@@ -1225,7 +1225,7 @@
             ],
             "time": 25,
             "description":"Éplucher les légumes, les couper en morceaux et les mettre à cuire dans une cocotte minute environ 15 minutes. Mixer en ajoutant le beurre, la crème. Ajouter le cumin et la noix de muscade.",
-            "appliance": "Mixer",
+            "appliance": "Mixeur",
             "ustensils":["cocotte minute", "couteau", "cuillère en bois"]
         },
         {
@@ -1259,7 +1259,7 @@
                 {
                     "ingredient": "Maïzena",
                     "quantity": 1,
-                    "unit": "cuillères à soupe"
+                    "unit": "cuillère à soupe"
                 }
             ],
             "time": 35,
@@ -1343,7 +1343,7 @@
             "servings": 40,
             "ingredients": [
                 {
-                    "ingredient": "Pomme",
+                    "ingredient": "Pommes",
                     "quantity": 2
                 },
                 {
@@ -1424,7 +1424,7 @@
         }, 
         {
             "id": 42,
-            "name": "Charlotte au poires",
+            "name": "Charlotte aux poires",
             "servings": 3,
             "ingredients": [
                 {
@@ -1704,7 +1704,7 @@
                     "quantity": 6
                 },
                 {
-                    "ingredient": "Poudre d'amendes",
+                    "ingredient": "Poudre d'amandes",
                     "quantity": 500,
                     "unit": "grammes"
                 },
