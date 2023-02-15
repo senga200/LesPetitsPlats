@@ -21,19 +21,32 @@
   <body>
     <header>
       <img src="logo.png" class="logo" alt="logo Les Petits Plats" />
-
-      <form action="/search" method="GET">
+    </header>
+    <form action="/search" method="GET">
+      <input
+        type="text"
+        name="search"
+        class="input"
+        id="searchInput"
+        placeholder="Rechercher une recette"
+      />
+      <button type="submit" class="fa fa-search"></button>
+    </form>
+    <div id="suggestions"></div>
+    <div id="tags">
+      <div id="ingredients">
+        <div id="suggestionsIngredients"></div>
         <input
           type="text"
           name="search"
-          class="input"
-          id="searchInput"
-          placeholder="Rechercher une recette"
+          class="inputTag"
+          id="searchInputTagIngredient"
+          placeholder="Rechercher un ingredient"
         />
-        <button type="submit" class="fa fa-search"></button>
-      </form>
-      <div id="suggestions"></div>
-    </header>
+      </div>
+      <div id="appareils">appareils</div>
+      <div id="ustensiles">ustensiles</div>
+    </div>
 
     <main>
       <div class="grid-container">
@@ -46,13 +59,7 @@
             <span class="temps"><i class="fas fa-regular fa-clock"></i></span>
           </div>
           <div class="description_recette">
-            <div class="ingredients_recette">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </div>
+            <div class="ingredients_recette"></div>
             <div class="recette">
               <p></p>
             </div>
