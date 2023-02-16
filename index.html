@@ -33,21 +33,29 @@
       <button type="submit" class="fa fa-search"></button>
     </form>
     <div id="suggestions"></div>
-    <div id="tags">
+
+    <div id="tags"></div>
+
+    <div class="rechercheSecondaire">
       <div id="ingredients">
-        <div id="suggestionsIngredients"></div>
-        <input
-          type="text"
-          name="search"
-          class="inputTag"
-          id="searchInputTagIngredient"
-          placeholder="Rechercher un ingredient"
-        />
+        <div class="blocSearch">
+          <input
+            type="text"
+            name="search"
+            class="inputTag"
+            id="searchInputTagIngredient"
+            placeholder="Rechercher un ingredient"
+          />
+          <button
+            type="submit"
+            id="chevron"
+            class="fa fa-solid fa-chevron-down"
+          ></button>
+        </div>
       </div>
       <div id="appareils">appareils</div>
       <div id="ustensiles">ustensiles</div>
     </div>
-
     <main>
       <div class="grid-container">
         <div class="recette_container">

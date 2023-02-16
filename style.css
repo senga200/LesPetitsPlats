@@ -15,17 +15,55 @@ h2{
 form {
     display: flex;
     padding: 20px 0 20px 0;   
-  }
+}
 
 #tags {
     display: flex;
+    border: solid seagreen;
     color: white;
 }
+#tags .selected {
+    background-color:#3282F7;
+    color: white;
+  }
+  
+.rechercheSecondaire{
+    display: flex;
+    align-items: center;
+    padding: 20px 0 20px 0;
+}
+.blocSearch {
+    display: flex;
+    width: 100%;
+    outline: none;
+
+}
+
+#searchInputTagIngredient{
+    display: none;
+} 
 
 li{
     list-style: none;
     cursor: pointer;
 }
+
+#searchInputTagIngredient{
+    flex: 1;
+    background-color:#3282F7;
+    padding:1rem;
+    border-right-style: none;
+    width: 100%;
+}
+
+#chevron {
+    border: none;
+    background-color: #3282F7;
+}
+#chevron.rotated {
+    transform: rotate(180deg);
+  }
+  
 
   #ingredients {
     background-color: #3282F7;
@@ -34,12 +72,16 @@ li{
     margin: 10px;
     border-radius : 5px;
   }
+
+  #ingredients li{
+    border: solid red;
+  }
 #appareils {
     background-color: #68D9A4;
     width: 170px;
     height: 170px;
-margin: 10px;
-border-radius : 5px;
+    margin: 10px;
+    border-radius : 5px;
   }
   #ustensiles {
    background-color: #ED6454;
@@ -49,12 +91,12 @@ border-radius : 5px;
    border-radius : 5px;
   }
   
-  input {
+  #searchInput {
     flex: 1;
     background-color:#E7E7E7;
     padding:1rem;
     border-right-style: none;
-
+    width: 100%;
   }
   button {
     background-color:#E7E7E7;
