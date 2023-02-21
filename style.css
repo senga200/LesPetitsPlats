@@ -45,7 +45,7 @@ form {
 
 li{
     list-style: none;
-    cursor: pointer;
+
 }
 
 #searchInputTagIngredient{
@@ -71,10 +71,26 @@ li{
     height: 170px;
     margin: 10px;
     border-radius : 5px;
+    overflow: scroll;
+    color: #fff;
+  }
+
+  
+#ingredients.expanded {
+    width: 700px;
+}
+
+  #ingredients ul{
+    display: none;
+  }
+
+  #ingredients.expanded ul{
+    column-count: 3;
   }
 
   #ingredients li{
-    border: solid red;
+    margin: 0;
+    cursor: pointer;
   }
 #appareils {
     background-color: #68D9A4;
