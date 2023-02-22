@@ -58,24 +58,58 @@ const ul = document.createElement("ul");
 const li = document.querySelectorAll("li");
 const chevron = document.querySelector("#chevron");
 
-/////////////////////////////////////////////////
 //********BARRE DE RECHERCHE PRINCIPALE********//
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 //PROBLEME : la liste des ingredients ne se mets pas à jour en meme temps que la recherche mais les tags sont à jour et affichent les ingredients qui sont = value
+
+//faire un addEventListener sur la valeur de l'input searchInput 
+//-si input.length >= 3 alors on filtre les recettes en filtrant la valeur de l'input dans le nom, la description et les ingredients. 
+//-si le champs est vide on affiche toutes les recettes, 
+//-si le champs a une valeur qui correspond à une recette on affiche la ou les recettes, et on stock le resultat dans une variable appelée InputResult qui sera utilisée pour le tri des ingredients
+//-si le champs a une valeur qui ne correspond à aucune recette on affiche un message d'erreur 
+let inputResult = "";
+let ingredientsTab = [];
+
 searchInput.addEventListener("input", function() {
-  const input = searchInput.value;
+  const input = searchInput.value.trim().toLowerCase();
+  
   if (input.length >= 3) {
+    // Vérifier si le texte entré correspond à un ingrédient
+    ingredientsTab = [];
+    for (const recipe of recipesTab) {
+      for (const ingredient of recipe.ingredients) {
+        if (ingredient.ingredient.toLowerCase().includes(input)) {
+          if (!ingredientsTab.includes(ingredient.ingredient)) {
+            ingredientsTab.push(ingredient.ingredient);
+          }
+        }
+      }
+    }
+    
     const result = recipesTab.filter(recipe =>
-      recipe.name.toLowerCase().includes(input.toLowerCase()) ||
-      recipe.description.toLowerCase().includes(input.toLowerCase()) ||
+      recipe.name.toLowerCase().includes(input) ||
+      recipe.description.toLowerCase().includes(input) ||
       recipe.ingredients.some(ingredient =>
-        ingredient.ingredient.toLowerCase().includes(input.toLowerCase())
+        ingredient.ingredient.toLowerCase().includes(input)
       )
     );
-    displayResults(result);// affiche les résultats filtrés
-  } else {
-    displayResults(recipesTab);// affiche toutes les recettes si la recherche est vide
+    if (result.length > 0) {
+      displayResults(result); // affiche les résultats filtrés
+    } else {
+      grid.innerHTML = "Aucune recette ne correspond à votre critère de recherche";
+      // const error = document.createElement("p");
+      // error.textContent = "Aucune recette ne correspond à votre critère de recherche";
+      // grid.appendChild(error);
+    }
+  } else if (input.length === 0) {
+    ingredientsTab = [];
+    displayResults(recipesTab);
   }
+  
+  console.log(ingredientsTab);
 });
+
 
 //AFFICHER UNIQUEMENT LE RESULTAT DE LA RECHERCHE DANS GRID//
 function displayResults(results){
@@ -87,6 +121,8 @@ function displayResults(results){
   }); 
 }
 
+
+
 //////////////////////////////////////////////////
 //********BARRE DE RECHERCHE INGREDIENTS********//
 //PROBLEME : les recettes sont filtrées que lorque l'on saisi dans l'input, mais pas au clic sur le tag. la liste des ingredients ne se met pas à jour
@@ -95,6 +131,7 @@ function displayResults(results){
 searchInputTagIngredient.addEventListener("input", function() {
   const input = searchInputTagIngredient.value;
   if (input.length >= 3) {
+    //
     const result = recipesTab.filter(recipe =>
       recipe.ingredients.some(ingredient =>
         ingredient.ingredient.toLowerCase().includes(input.toLowerCase())
@@ -171,9 +208,15 @@ searchInput.addEventListener("input", function() {
 const tags = document.querySelector("#tags");
 function createTag(inputValue){
   const li = document.querySelectorAll("#ingredients li");
+  if (inputValue.trim() === '' || inputValue.length < 3) { // Vérifier si la valeur de l'input est vide ou 3 caractères
+    tags.style.display = 'none'; // Cacher les tags
+    return;
+  } else {
+    tags.style.display = 'block'; // Afficher les tags
+  }
   tags.innerHTML = ''; // Réinitialiser les tags existants
   li.forEach(ingredient => {
-    const selectedIngredients = [];
+    //const selectedIngredients = [];
     const ingredientName = ingredient.textContent.trim().toLowerCase();
     if (ingredientName.includes(inputValue)) {
       const tag = document.createElement("span"); // Ajouter le tag correspondant
@@ -183,7 +226,7 @@ function createTag(inputValue){
       tag.classList.add("selected");
       tags.appendChild(tag);
       tags.appendChild(closeBtn);
-      selectedIngredients.push(ingredientName);
+      //selectedIngredients.push(ingredientName);
     }
   });
 }
@@ -230,3 +273,9 @@ tags.addEventListener("click", function(e) {
   }
 }
 );
+
+//au clic sur searchInputTagIngredient mettre en display block  
+// searchInputTagIngredient.addEventListener("click", function() {
+//   ingredientsList.style.display = "block";
+// }
+// );
