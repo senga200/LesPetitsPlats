@@ -47,6 +47,9 @@ getRecipe();
 let recipesTab=[];
 //  Barrre de recherche principale
 const searchInput = document.getElementById("searchInput");
+let inputResult = "";
+let ingredientsTab = [];
+//ingredientsTab = tableau des ingredients selectionnés
 //container de toutes les recettes
 const grid = document.querySelector(".grid-container");
 //Barrre de recherche secondaire ingrédients 
@@ -58,6 +61,19 @@ const ul = document.createElement("ul");
 const li = document.querySelectorAll("li");
 const chevron = document.querySelector("#chevron");
 
+
+//AFFICHER UNIQUEMENT LE RESULTAT DE LA RECHERCHE DANS GRID//
+function displayResults(results){
+  grid.innerHTML = "";
+  results.forEach(recipe => {
+    const recipeDetail = recipeFactory(recipe);
+    const recipeElement = recipeDetail.getRecipeDOM();
+    grid.appendChild(recipeElement);
+  }); 
+}
+
+
+
 //********BARRE DE RECHERCHE PRINCIPALE********//
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -68,12 +84,8 @@ const chevron = document.querySelector("#chevron");
 //-si le champs est vide on affiche toutes les recettes, 
 //-si le champs a une valeur qui correspond à une recette on affiche la ou les recettes, et on stock le resultat dans une variable appelée InputResult qui sera utilisée pour le tri des ingredients
 //-si le champs a une valeur qui ne correspond à aucune recette on affiche un message d'erreur 
-let inputResult = "";
-let ingredientsTab = [];
-
 searchInput.addEventListener("input", function() {
   const input = searchInput.value.trim().toLowerCase();
-  
   if (input.length >= 3) {
     // Vérifier si le texte entré correspond à un ingrédient
     ingredientsTab = [];
@@ -106,44 +118,14 @@ searchInput.addEventListener("input", function() {
     ingredientsTab = [];
     displayResults(recipesTab);
   }
-  
+  //afficher l'ingredient recherché dans l'input principal
   console.log(ingredientsTab);
 });
-
-
-//AFFICHER UNIQUEMENT LE RESULTAT DE LA RECHERCHE DANS GRID//
-function displayResults(results){
-  grid.innerHTML = "";
-  results.forEach(recipe => {
-    const recipeDetail = recipeFactory(recipe);
-    const recipeElement = recipeDetail.getRecipeDOM();
-    grid.appendChild(recipeElement);
-  }); 
-}
-
-
-
-//////////////////////////////////////////////////
+/////////////////////////////////////////////////
 //********BARRE DE RECHERCHE INGREDIENTS********//
-//PROBLEME : les recettes sont filtrées que lorque l'on saisi dans l'input, mais pas au clic sur le tag. la liste des ingredients ne se met pas à jour
-//et n'afficher que les recettes qui contiennent les ingredients recherchés
+//////////////////////////////////////////////////
 
-searchInputTagIngredient.addEventListener("input", function() {
-  const input = searchInputTagIngredient.value;
-  if (input.length >= 3) {
-    //
-    const result = recipesTab.filter(recipe =>
-      recipe.ingredients.some(ingredient =>
-        ingredient.ingredient.toLowerCase().includes(input.toLowerCase())
-        )
-        );
-        console.log(result);
-        displayResults(result); // affiche les résultats filtrés
-      } else {
-        displayResults(recipesTab); // affiche toutes les recettes si la recherche est vide
-      }  
-}); 
-
+//PROBLEME : les recettes sont filtrées. la liste des ingredients ne se met pas à jour
 //recuperer la liste de tous ingredients et les afficher dans la div ingredients et supprimer les doublons
 async function getIngredients() {
   try {
@@ -185,97 +167,89 @@ chevron.addEventListener("click", function() {
   }
 });
 
-
-//filtrer les ingredients dans la div #ingredients en meme temps que la recherche principale
-//ne fonctionne pas
-//boucle avec li ou ingredient ?
-searchInput.addEventListener("input", function() {
-  const input = searchInput.value;
-  li.forEach(ingredient => {
-    if (ingredient.textContent.toLowerCase().includes(input.toLowerCase())) {
-      ingredient.style.display = "block";
-    } else {
-      ingredient.style.display = "none";
-    }
-  });
-});
-
-
-//***********LES TAGS ****************//
-
-//creer un tag avec l'ingredient saisi dans input et n'afficher que les recettes qui contiennent les ingredients recherchés avec la methode inlcudes pour filtrer les elements saisis dans l'input    
-//trim pour supprimer les espaces avant et apres le texte de chaque li
-const tags = document.querySelector("#tags");
-function createTag(inputValue){
-  const li = document.querySelectorAll("#ingredients li");
-  if (inputValue.trim() === '' || inputValue.length < 3) { // Vérifier si la valeur de l'input est vide ou 3 caractères
-    tags.style.display = 'none'; // Cacher les tags
-    return;
+//afficher que les recettes qui contiennent les ingredients recherchés
+searchInputTagIngredient.addEventListener("input", function() {
+  const input = searchInputTagIngredient.value;
+  // On filtre les recettes contenant les ingrédients correspondant
+  if (input.length >= 3) {
+    //recherche dans les ingredients
+    const result = recipesTab.filter(recipe =>
+      recipe.ingredients.some(ingredient =>
+        ingredient.ingredient.toLowerCase().includes(input.toLowerCase())
+      ));
+    console.log(result);
+    console.log(ingredientsTab); 
+    displayResults(result);
   } else {
-    tags.style.display = 'block'; // Afficher les tags
+    displayResults(recipesTab);
+  }  
+});
+//***********LES TAGS ****************//
+const tags = document.querySelector("#tags");
+////////////CREATION TAG////////////////
+//selectedTags recupère les tags créés et supprimés
+const selectedTags = [];
+
+function createTag(inputValue) {
+  if (inputValue.trim() === "" || inputValue.length < 3) {
+    tags.style.display = "none";
+    return;
   }
-  tags.innerHTML = ''; // Réinitialiser les tags existants
-  li.forEach(ingredient => {
-    //const selectedIngredients = [];
+  const li = document.querySelectorAll("#ingredients li");
+  li.forEach((ingredient) => {
     const ingredientName = ingredient.textContent.trim().toLowerCase();
     if (ingredientName.includes(inputValue)) {
-      const tag = document.createElement("span"); // Ajouter le tag correspondant
+      const tag = document.createElement("span");
       tag.innerHTML = `<strong>${ingredientName}</strong>`;
       const closeBtn = document.createElement("i");
       closeBtn.innerHTML = "❌";
       tag.classList.add("selected");
       tags.appendChild(tag);
       tags.appendChild(closeBtn);
-      //selectedIngredients.push(ingredientName);
     }
   });
+  tags.style.display = "block";
 }
-searchInputTagIngredient.addEventListener("input", function() {
-  const input = searchInputTagIngredient.value.toLowerCase();
-  createTag(input);
-});
-searchInput.addEventListener("input", function() {
-  const input = searchInput.value.toLowerCase();
-  createTag(input);
-}
-);
 
-//selectionner l'ingredient dans la liste et l'afficher dans le tag
-//affichage dans grid ok
-ingredientsList.addEventListener("click", function(e) {
+function filterRecipes() {
+  const searchText = searchInput.value.toLowerCase().trim();
+  const filteredRecipes = recipesTab.filter((recipe) => {
+    const ingredients = recipe.ingredients.map((ingredient) => ingredient.ingredient.toLowerCase());
+    const includesSearchText = recipe.name.toLowerCase().includes(searchText) || ingredients.includes(searchText);
+    const includesSelectedTags = selectedTags.every((tag) => ingredients.includes(tag));
+    return includesSearchText && includesSelectedTags;
+  });
+  displayResults(filteredRecipes);
+}
+
+
+//OK ajouter l'ingrédient dans le tableau selectedTags
+//OK pour le filtrage 
+ingredientsList.addEventListener("click", function (e) {
   if (e.target.tagName === "LI") {
     const ingredient = e.target.textContent.trim().toLowerCase();
     createTag(ingredient);
-    const tags = document.querySelectorAll('.selected');
-    const values = [];
-    tags.forEach(tag => {
-      values.push(tag.textContent);
-    });
-    const result = recipesTab.filter(recipe => {
-      return values.every(value => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(value.toLowerCase())));
-    });
-    if (values.length > 0) {
-      displayResults(result);
-    } else {
-      displayResults(recipesTab);
-    }
+    selectedTags.push(ingredient);
+    filterRecipes();
+    console.log(selectedTags);
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${ingredient}`;
+    ul.appendChild(li);
   }
 });
 
-
-//supprimer le tag en cliquant sur la croix et mettre à jour l'affichage des recettes
-//ok
+//OK Supprimer l'ingrédient des tags sélectionnés dans le tableau selectedTags
+//OK pour le filtrage 
 tags.addEventListener("click", function(e) {
   if (e.target.tagName === "I") {
+    const ingredientName = e.target.previousElementSibling.textContent.trim().toLowerCase();
     e.target.previousElementSibling.remove();
     e.target.remove();
-    displayResults(recipesTab);
+    const index = selectedTags.indexOf(ingredientName);
+    if (index > -1) {
+      selectedTags.splice(index, 1);
+    }
+    filterRecipes();
+    console.log(selectedTags);
   }
-}
-);
-
-//au clic sur searchInputTagIngredient mettre en display block  
-// searchInputTagIngredient.addEventListener("click", function() {
-//   ingredientsList.style.display = "block";
-// }
-// );
+});
