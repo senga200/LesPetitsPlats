@@ -817,4 +817,55 @@ tags.addEventListener("click", function(e) {
 // }
 
 
+function createTag(inputValue){
+  const li = document.querySelectorAll("#ingredients li");
+  if (inputValue.trim() === '' || inputValue.length < 3) { // Vérifier si la valeur de l'input est vide ou 3 caractères
+    tags.style.display = 'none'; // Cacher les tags
+    return;
+  } else {
+    tags.style.display = 'block'; // Afficher les tags
+  }
+  tags.innerHTML = ''; // Réinitialiser les tags existants
+  li.forEach(ingredient => {
+    const ingredientName = ingredient.textContent.trim().toLowerCase();
+    if (ingredientName.includes(inputValue)) {
+      const tag = document.createElement("span"); // Ajouter le tag correspondant
+      tag.innerHTML = `<strong>${ingredientName}</strong>`;
+      const closeBtn = document.createElement("i");
+      closeBtn.innerHTML = "❌";
+      tag.classList.add("selected");
+      tags.appendChild(tag);
+      tags.appendChild(closeBtn);
+    }
+  });
+}
+searchInputTagIngredient.addEventListener("input", function() {
+  const input = searchInputTagIngredient.value.toLowerCase();
+  createTag(input);
+});
+searchInput.addEventListener("input", function() {
+  const input = searchInput.value.toLowerCase();
+  createTag(input);
+}
+);
 
+//selectionner l'ingredient dans la liste et l'afficher dans le tag
+ingredientsList.addEventListener("click", function(e) {
+  if (e.target.tagName === "LI") {
+    const ingredient = e.target.textContent.trim().toLowerCase();
+    createTag(ingredient);
+    const tags = document.querySelectorAll('.selected');
+    const values = [];
+    tags.forEach(tag => {
+      values.push(tag.textContent);
+    });
+    const result = recipesTab.filter(recipe => {
+      return values.every(value => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(value.toLowerCase())));
+    });
+    if (values.length > 0) {
+      displayResults(result);
+    } else {
+      displayResults(recipesTab);
+    }
+  }
+});
