@@ -11,103 +11,8 @@ header{
 h2{
     font-size: 18px;
 }
-
-form {
-    display: flex;
-    padding: 20px 0 20px 0;   
-}
-
-#tags {
-    display: flex;
-    border: solid seagreen;
-    color: white;
-}
-#tags .selected {
-    background-color:#3282F7;
-    color: white;
-  }
-  
-.rechercheSecondaire{
-    display: flex;
-    align-items: center;
-    padding: 20px 0 20px 0;
-}
-.blocSearch {
-    display: flex;
-    width: 100%;
-    outline: none;
-
-}
-
-#searchInputTagIngredient{
-    display: none;
-} 
-
-li{
-    list-style: none;
-
-}
-
-#searchInputTagIngredient{
-    flex: 1;
-    background-color:#3282F7;
-    padding:1rem;
-    border-right-style: none;
-    width: 100%;
-}
-
-#chevron {
-    border: none;
-    background-color: #3282F7;
-}
-#chevron.rotated {
-    transform: rotate(180deg);
-  }
-  
-
-  #ingredients {
-    background-color: #3282F7;
-    width: 170px;
-    height: 170px;
-    margin: 10px;
-    border-radius : 5px;
-    overflow: scroll;
-    color: #fff;
-  }
-
-  
-#ingredients.expanded {
-    width: 700px;
-}
-
-  #ingredients ul{
-    display: none;
-  }
-
-  #ingredients.expanded ul{
-    column-count: 3;
-  }
-
-  #ingredients li{
-    margin: 0;
-    cursor: pointer;
-  }
-#appareils {
-    background-color: #68D9A4;
-    width: 170px;
-    height: 170px;
-    margin: 10px;
-    border-radius : 5px;
-  }
-  #ustensiles {
-   background-color: #ED6454;
-   width: 170px;
-   height: 170px;
-   margin: 10px;
-   border-radius : 5px;
-  }
-  
-  #searchInput {
+/****BARRE DE RECHERCHE PRINCIPALE****/
+#searchInput {
     flex: 1;
     background-color:#E7E7E7;
     padding:1rem;
@@ -122,6 +27,160 @@ li{
     font-size: 1.2em;
     cursor: pointer;
   }
+
+form {
+    display: flex;
+    padding: 20px 0 20px 0;
+}
+/*****LES TAGS*****/
+
+#tags {
+    display: flex;
+}
+
+#tags .selected {
+    background-color:#3282F7;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    
+  }
+  
+  #tags i {
+    font-size: 15px;
+    padding-left: 8px;
+  }
+
+/******BARRES DE RECHERCHES SECONDAIRES***********/
+
+.rechercheSecondaire{
+    display: flex;
+    align-items: center;
+    padding: 20px 0 20px 0;
+    border: solid red;
+}
+/* .blocSearch {
+    display: flex;
+    width: 100%;
+    outline: none;
+
+} */
+.blocSearchIngredients, .blocSearchAppareils, .blocSearchUstensiles {
+    padding: 10px;
+    display: block;
+    width: 170px;
+    border: solid green;
+    /* border: none; */
+    outline: none;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #f1f1f1;
+    cursor: pointer;
+    border-radius:  5px;
+}
+/* .blocSearch img {
+    width: 10px;
+} */
+
+#appareils li:last-child, #ingredients li:last-child, #ustensiles li:last-child {
+    padding-bottom: 25px;
+}
+
+#ingredients, #appareils, #ustensiles {
+    width: auto;
+    height: 170px;
+    margin: 10px;
+    border-radius : 5px;
+    /* overflow: scroll; */
+    color: #fff;
+    transition: height 0.4s ease-in-out;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);/*menu caché dessous*/
+}
+
+#ingredients {
+    background-color: #3282F7;
+}
+
+  #ustensiles {
+    background-color: #ED6454;
+}  
+
+#appareils {
+    background: #68D9A4;
+}
+/* #searchInputTagIngredient{
+    display: none;
+}  */
+li{
+    list-style: none;
+
+}
+#searchInputTagIngredient, #searchInputTagAppareil, #searchInputTagUstensile {
+    flex: 1;
+    padding:1rem;
+    border-right-style: none;
+    width: 100%;
+}
+
+#ingredients #chevron {
+    border: none;
+    background-color: #3282F7;
+}
+
+#appareils #chevron {
+    border: none;
+    background-color: #68D9A4;
+}
+
+#ustensiles #chevron {
+    border: none;
+    background-color: #ED6454;
+}
+
+#chevron.rotated {
+    transform: rotate(180deg);
+  }
+
+
+  
+/* #ingredients.expanded {
+    width: 700px;
+}
+
+  #ingredients ul{
+    display: none;
+  } */
+
+  /* #ingredients.expanded ul{
+    column-count: 3;
+  } */
+
+  #ingredients li{
+    margin: 0;
+    cursor: pointer;
+  }
+/* #appareils {
+    background-color: #68D9A4;
+    width: 170px;
+    height: 170px;
+    margin: 10px;
+    border-radius : 5px;
+  } */
+  #ustensiles {
+   background-color: #ED6454;
+    /* width: 170px; */
+    width: auto;
+    height: 170px;
+    margin: 10px;
+    border-radius : 5px;
+    /* overflow: scroll; */
+    color: #fff;
+    transition: height 0.4s ease-in-out;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);/*menu caché dessous*/
+  }
+  
 
 .grid-container {
     display: grid;
